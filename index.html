@@ -137,7 +137,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /* Optional: glow behind the logo image */
             filter: drop-shadow(0 0 20px rgba(230, 34, 34, 0.4));
         }
 
@@ -145,7 +144,6 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            /* Ensures smooth rendering */
             image-rendering: -webkit-optimize-contrast;
         }
 
@@ -332,7 +330,8 @@
             color: white;
             font-size: 1.2rem;
             font-weight: 700;
-            text-transform: uppercase;
+            /* FIXED: Changed from 'uppercase' to 'none' */
+            text-transform: none; 
             margin-bottom: 0.5rem;
         }
 
@@ -344,11 +343,27 @@
             text-transform: uppercase;
         }
 
+        /* --- ROBLOX BLACK LOGO FIX --- */
+        /* Added this back in for you */
+        .roblox-img {
+            height: 1.8rem;
+            width: auto;
+            vertical-align: middle;
+            transition: all 0.3s ease;
+            filter: invert(100%); /* Turns black image white */
+        }
+        
+        /* Hover Effect: Turns logo RED */
+        .socials a:hover .roblox-img {
+            transform: scale(1.1);
+            filter: invert(16%) sepia(96%) saturate(6806%) hue-rotate(357deg) brightness(97%) contrast(116%);
+        }
+
         /* --- FOOTER --- */
         footer { background: #020202; border-top: 1px solid #222; padding: 4rem 1.5rem; text-align: center; }
         .footer-logo { font-size: 1.5rem; font-weight: 900; color: white; margin-bottom: 0.5rem; text-transform: uppercase; }
         .socials { margin: 2rem 0; }
-        .socials a { color: white; font-size: 1.5rem; margin: 0 15px; transition: var(--transition); }
+        .socials a { color: white; font-size: 1.5rem; margin: 0 15px; transition: var(--transition); display: inline-block; }
         .socials a:hover { color: var(--accent-red); text-shadow: 0 0 15px var(--accent-red); }
 
         @media (max-width: 768px) {
@@ -379,7 +394,6 @@
 
     <!-- HERO SECTION -->
     <section class="hero">
-        <!-- LOGO IMAGE HERE -->
         <div class="logo-container">
             <img src="logo.png" alt="Team Shadow Logo"> 
         </div>
@@ -508,7 +522,12 @@
         <div class="socials">
             <a href="https://discord.gg/pzrnu6VCsw"><i class="fab fa-discord"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.roblox.com/communities/295489600/Team-Shadow-Headquarters#!/about"><i class="fas fa-gamepad"></i></a>
+            
+            <!-- ROBLOX IMAGE LINK with BLACK LOGO FIX (Restored) -->
+            <a href="https://www.roblox.com/communities/295489600/Team-Shadow-Headquarters#!/about">
+                <!-- I'm using a generic Roblox SVG here, but you can change it back to your custom image if you had one -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Roblox_Logo_2022.svg" alt="Roblox" class="roblox-img">
+            </a>
         </div>
 
         <p style="font-size:0.8rem; color:#444;">
@@ -526,7 +545,7 @@
             { 
                 name: "ShadowGamerSamYT", 
                 role: "Owner", 
-                image: "" // Optional: Add image URL here
+                image: "" 
             },
             { 
                 name: "TLB0117", 
