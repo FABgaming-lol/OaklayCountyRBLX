@@ -126,35 +126,27 @@
             pointer-events: none;
         }
 
+        /* LOGO STYLES */
         .logo-container {
-            width: 180px;
-            height: 180px;
+            width: 200px;
+            height: 200px;
             margin-bottom: 2rem;
             position: relative;
             z-index: 2;
             animation: fadeIn 1.2s ease-out;
-            background: rgba(0,0,0,0.5); 
-            border: 2px dashed var(--accent-red);
-            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 30px rgba(230, 34, 34, 0.2);
+            /* Optional: glow behind the logo image */
+            filter: drop-shadow(0 0 20px rgba(230, 34, 34, 0.4));
         }
 
         .logo-container img {
             max-width: 100%;
-            border-radius: 50%;
-            display: block; 
-        }
-
-        .placeholder-text {
-            position: absolute;
-            color: var(--accent-red);
-            font-weight: bold;
-            text-align: center;
-            font-size: 0.8rem;
-            text-transform: uppercase;
+            max-height: 100%;
+            object-fit: contain;
+            /* Ensures smooth rendering */
+            image-rendering: -webkit-optimize-contrast;
         }
 
         .hero-content {
@@ -292,7 +284,7 @@
         .guideline-list li:hover { border-left-color: var(--accent-red); padding-left: 25px; }
         .guideline-list strong { display: block; color: white; margin-bottom: 5px; font-size: 1.1rem; }
 
-        /* --- TEAM SECTION STYLES (NEW) --- */
+        /* --- TEAM SECTION STYLES --- */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -380,16 +372,16 @@
                 <li><a href="#overview">Overview</a></li>
                 <li><a href="#agencies">Agencies</a></li>
                 <li><a href="#protocols">Protocols</a></li>
-                <li><a href="#roster">Roster</a></li> <!-- Added Link -->
+                <li><a href="#roster">Roster</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- HERO SECTION -->
     <section class="hero">
+        <!-- LOGO IMAGE HERE -->
         <div class="logo-container">
-            <span class="placeholder-text">Logo<br>Here</span>
-            <img src="" alt="" onerror="this.style.display='none'"> 
+            <img src="logo.png" alt="Team Shadow Logo"> 
         </div>
 
         <div class="hero-content">
@@ -495,7 +487,7 @@
         </div>
     </section>
 
-    <!-- ROSTER / TEAM SECTION (NEW) -->
+    <!-- ROSTER / TEAM SECTION -->
     <section id="roster" class="container fade-in-section">
         <div class="section-header">
             <h3>Command Staff</h3>
@@ -503,9 +495,8 @@
             <p style="color:var(--text-muted); margin-top:1rem;">The architects behind Oakley County.</p>
         </div>
         
-        <!-- The Team Grid Container - Content is injected via JavaScript below -->
         <div class="team-grid" id="team-container">
-            <!-- Team members appear here automatically -->
+            <!-- Team members appear here via JavaScript below -->
         </div>
     </section>
 
@@ -535,7 +526,7 @@
             { 
                 name: "YourName", 
                 role: "Project Lead", 
-                image: "" // Add image URL here (e.g., 'https://site.com/avatar.png'). Leave empty for default icon.
+                image: "" // Optional: Add image URL here
             },
             { 
                 name: "DeveloperOne", 
@@ -546,26 +537,18 @@
                 name: "BuilderTwo", 
                 role: "Map Designer", 
                 image: "" 
-            },
-            { 
-                name: "AdminThree", 
-                role: "Staff Manager", 
-                image: "" 
             }
-            // To add more, copy one of the blocks above { ... }, and paste it here!
         ];
 
         // ==========================================
-        //  LOGIC (DO NOT TOUCH BELOW)
+        //  RENDER LOGIC
         // ==========================================
-        
-        // Render Team
         const teamContainer = document.getElementById('team-container');
         
         teamMembers.forEach(member => {
             const imgContent = member.image 
                 ? `<img src="${member.image}" alt="${member.name}">` 
-                : `<i class="fas fa-user-secret"></i>`; // Fallback icon
+                : `<i class="fas fa-user-secret"></i>`; 
 
             const html = `
                 <div class="team-card">
@@ -579,7 +562,6 @@
             teamContainer.innerHTML += html;
         });
 
-        // Scroll Animations
         document.addEventListener('DOMContentLoaded', () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
